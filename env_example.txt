@@ -1,0 +1,20 @@
+# Telegram Bot Configuration
+BOT_TOKEN=your_bot_token_here
+
+# Telegram API for comment checking
+TG_API_ID=your_api_id_here
+TG_API_HASH=your_api_hash_here
+SESSION_STRING=your_session_string_here
+
+# Server Configuration
+HOST=0.0.0.0
+PORT=5000
+
+# Production webhook (replace with your domain)
+WEBHOOK_URL=https://yourdomain.com/webhook
+
+# Database (default: bot.db in current directory)
+DATABASE_PATH=./bot.db
+
+# Optional: Custom domain for deployment
+CUSTOM_DOMAIN=yourdomain.com

@@ -1,0 +1,551 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Rhombis | v1",
+    "description": "[Rhombis](https://rhombis.app) API for purchasing Telegram Stars and Premium\n\nContact [@ludwintor](https://t.me/ludwintor) if you have any trouble with the integration",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.rhombis.app"
+    },
+    {
+      "url": "http://localhost:8081"
+    }
+  ],
+  "paths": {
+    "/fee": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "description": "Fee percentage in normalized form (e.g. 0.69 is 69%)",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFeeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stars/recipient": {
+      "get": {
+        "tags": [
+          "Stars"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRecipientResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stars/transaction": {
+      "post": {
+        "tags": [
+          "Stars"
+        ],
+        "description": "Send `message` to provided `address` with `amount` nanoTON and `payload` to complete purchase\n\n\n**NOTE: DO NOT** send `payload` as a comment. `payload` is a base64 encoded Cell",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostStarsTransactionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/premium/recipient": {
+      "get": {
+        "tags": [
+          "Premium"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRecipientResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/premium/transaction": {
+      "post": {
+        "tags": [
+          "Premium"
+        ],
+        "description": "Send `message` to provided `address` with `amount` nanoTON and `payload` to complete purchase\n\n\n**NOTE: DO NOT** send `payload` as a comment. `payload` is a base64 encoded Cell",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostPremiumTransactionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ton/recipient": {
+      "get": {
+        "tags": [
+          "Ton"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRecipientResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ton/transaction": {
+      "post": {
+        "tags": [
+          "Ton"
+        ],
+        "description": "Send `message` to provided `address` with `amount` nanoTON and `payload` to complete purchase\n\n\n**NOTE: DO NOT** send `payload` as a comment. `payload` is a base64 encoded Cell",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTonTransactionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nft/recipient": {
+      "get": {
+        "tags": [
+          "NFT"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRecipientResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nft/transaction": {
+      "post": {
+        "tags": [
+          "NFT"
+        ],
+        "description": "Send `message` to transfer NFT back to Telegram\n\n**NOTE: DO NOT** send `payload` as a comment. `payload` is a base64 encoded Cell",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostNftTransactionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorResponse": {
+        "required": [
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "GetFeeResponse": {
+        "required": [
+          "fee"
+        ],
+        "type": "object",
+        "properties": {
+          "fee": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "GetRecipientResponse": {
+        "required": [
+          "recipient",
+          "photoUrl",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "recipient": {
+            "type": "string"
+          },
+          "photoUrl": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "PostNftTransactionRequest": {
+        "required": [
+          "recipient",
+          "nft",
+          "sender"
+        ],
+        "type": "object",
+        "properties": {
+          "recipient": {
+            "type": "string",
+            "description": "Recipient acquired via `/nft/recipient` endpoint"
+          },
+          "nft": {
+            "type": "string",
+            "description": "Hex or Base64 TON address"
+          },
+          "sender": {
+            "type": "string",
+            "description": "Hex or Base64 TON address. Excess TON will be returned to this address"
+          }
+        }
+      },
+      "PostPremiumTransactionRequest": {
+        "required": [
+          "recipient",
+          "months"
+        ],
+        "type": "object",
+        "properties": {
+          "recipient": {
+            "type": "string",
+            "description": "Recipient acquired via `/premium/recipient` endpoint"
+          },
+          "months": {
+            "type": "integer",
+            "description": "Allowed values: `3`, `6`, `12`",
+            "format": "int32"
+          },
+          "referrer": {
+            "type": "string",
+            "description": "Hex or Base64 TON address",
+            "nullable": true
+          }
+        }
+      },
+      "PostStarsTransactionRequest": {
+        "required": [
+          "recipient",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "recipient": {
+            "type": "string",
+            "description": "Recipient acquired via `/stars/recipient` endpoint"
+          },
+          "quantity": {
+            "maximum": 1000000,
+            "minimum": 50,
+            "type": "integer",
+            "format": "int32"
+          },
+          "referrer": {
+            "type": "string",
+            "description": "Hex or Base64 TON address",
+            "nullable": true
+          }
+        }
+      },
+      "PostTonTransactionRequest": {
+        "required": [
+          "recipient",
+          "amount"
+        ],
+        "type": "object",
+        "properties": {
+          "recipient": {
+            "type": "string",
+            "description": "Recipient acquired via `/ton/recipient` endpoint"
+          },
+          "amount": {
+            "maximum": 10000000,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Amount in TON (not nanoTON)",
+            "format": "int32"
+          },
+          "referrer": {
+            "type": "string",
+            "description": "Hex or Base64 TON address",
+            "nullable": true
+          }
+        }
+      },
+      "PostTransactionResponse": {
+        "required": [
+          "validUntil",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "validUntil": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "$ref": "#/components/schemas/TonPayloadMessage"
+          }
+        }
+      },
+      "TonPayloadMessage": {
+        "required": [
+          "address",
+          "amount",
+          "payload"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "payload": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "General"
+    },
+    {
+      "name": "Stars",
+      "description": "Telegram Stars price is dollar-constant and always $0.015 per Star\n\nYou can calculate dollar price including our fee for yourself `0.015 * quantity * (1 + serviceFee)`\n\n Service fee can be fetched via `/fee` endpoint"
+    },
+    {
+      "name": "Premium",
+      "description": "Telegram Premium price is dollar-constant for all three options:\n+ $11.99 for 3 months\n+ $15.99 for 6 months\n+ $28.99 for 12 months\n\nYou can calculate dollar price including our fee for yourself `price * (1 + serviceFee)`\n\n Service fee can be fetched via `/fee` endpoint"
+    },
+    {
+      "name": "Ton",
+      "description": "Top up \"My TON\" balance in Telegram"
+    },
+    {
+      "name": "NFT",
+      "description": "Transfer gift NFT back to Telegram. Service fee + gas fee = ~0.06 TON"
+    }
+  ]
+}

@@ -1,0 +1,648 @@
+/* Rhombis TMA Styles - Modern Design matching rhombis.app */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Montserrat', 'Arial', sans-serif;
+  background: #f8fafc;
+  color: #1a3185;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.header {
+  text-align: center;
+  padding: 32px 0 24px;
+  background: linear-gradient(135deg, rgba(26, 49, 133, 0.05) 0%, rgba(22, 115, 250, 0.1) 100%);
+  border-radius: 0 0 24px 24px;
+  margin: 0 -16px 32px;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1673fa;
+  margin-bottom: 8px;
+  background: linear-gradient(45deg, #1673fa, #0f50ca);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* TON Connect Wallet */
+.wallet-container {
+  margin-bottom: 24px;
+}
+
+/* Multifunctional Wallet Button */
+.wallet-multifunctional-button {
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(26, 49, 133, 0.08);
+}
+
+.wallet-multifunctional-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 49, 133, 0.15);
+}
+
+.wallet-multifunctional-button.connected {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  border-color: #16a34a;
+  color: #15803d;
+}
+
+.wallet-multifunctional-button.connected:hover {
+  background: linear-gradient(135deg, #bbf7d0 0%, #86efac 100%);
+}
+
+.wallet-multifunctional-button.disconnected {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-color: #1673fa;
+  color: #1d4ed8;
+}
+
+.wallet-multifunctional-button.disconnected:hover {
+  background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+}
+
+.wallet-multifunctional-button.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.wallet-multifunctional-button:disabled {
+  cursor: not-allowed;
+}
+
+.wallet-button-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.wallet-button-icon {
+  font-size: 28px;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.wallet-button-info {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wallet-button-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.wallet-button-subtitle {
+  font-size: 13px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.wallet-button-action {
+  font-size: 20px;
+  opacity: 0.6;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+}
+
+.wallet-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Old wallet styles for backward compatibility */
+.wallet-status {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.wallet-info {
+  color: #1673fa;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.wallet-address {
+  font-size: 12px;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 8px 12px;
+  border-radius: 8px;
+  word-break: break-all;
+  margin-bottom: 16px;
+}
+
+/* Main Panels */
+.main-panel {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(26, 49, 133, 0.08);
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.panel-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a3185;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-icon {
+  font-size: 20px;
+}
+
+/* Buttons */
+.button {
+  background: #1673fa;
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(22, 115, 250, 0.25);
+  transition: all 0.2s ease;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.button:hover {
+  background: #0f50ca;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(22, 115, 250, 0.35);
+}
+
+.button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(148, 163, 184, 0.2);
+}
+
+.button-secondary {
+  background: #f1f5f9;
+  color: #1a3185;
+  border: 1px solid #e2e8f0;
+}
+
+.button-secondary:hover {
+  background: #e2e8f0;
+  color: #1a3185;
+}
+
+/* Input Fields */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 0;
+  border-radius: 10px;
+  border: 2px solid #e2e8f0;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #1673fa;
+  box-shadow: 0 0 0 3px rgba(22, 115, 250, 0.1);
+}
+
+/* Product Options */
+.options-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.option-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.option-card:hover {
+  border-color: #1673fa;
+  background: #f1f5f9;
+  transform: translateY(-1px);
+}
+
+.option-card.selected {
+  border-color: #1673fa;
+  background: linear-gradient(135deg, rgba(22, 115, 250, 0.05) 0%, rgba(22, 115, 250, 0.1) 100%);
+}
+
+.option-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a3185;
+  margin-bottom: 4px;
+}
+
+.option-price {
+  font-size: 14px;
+  color: #1673fa;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.option-desc {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Stars Grid */
+.stars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.stars-preset {
+  padding: 12px 8px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a3185;
+}
+
+.stars-preset:hover {
+  border-color: #1673fa;
+  background: #f1f5f9;
+}
+
+.stars-preset.selected {
+  border-color: #1673fa;
+  background: #1673fa;
+  color: #fff;
+}
+
+/* Loading States */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Status Messages */
+.status-success {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  color: #166534;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 16px 0;
+  border: 1px solid #bbf7d0;
+  font-weight: 500;
+}
+
+.status-error {
+  background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+  color: #dc2626;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 16px 0;
+  border: 1px solid #fecaca;
+  font-weight: 500;
+}
+
+.status-info {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  color: #1d4ed8;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 16px 0;
+  border: 1px solid #dbeafe;
+  font-weight: 500;
+}
+
+/* Fee Display */
+.fee-info {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Premium Purchase Form Styles */
+.premium-purchase-form {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(26, 49, 133, 0.08);
+    margin-bottom: 24px;
+}
+
+.premium-purchase-form h3 {
+    margin: 0 0 20px 0;
+    color: #1a3185;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.user-search {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+    background: white;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.input-group button {
+    padding: 12px 20px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.input-group button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+.input-group button:hover:not(:disabled) {
+    background: #2563eb;
+}
+
+.recipient-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.user-username {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.duration-selection {
+    margin-bottom: 20px;
+}
+
+.duration-selection label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.duration-selection select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.duration-selection select:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.wallet-status {
+    padding: 12px 16px;
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    color: #166534;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.status {
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    margin-top: 16px;
+}
+
+.status.success {
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+}
+
+.status.error {
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+}
+
+.status.info {
+    background: #dbeafe;
+    border: 1px solid #bfdbfe;
+    color: #1d4ed8;
+}
+
+/* User Preview Styles */
+.user-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.user-preview.searching {
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+    justify-content: center;
+}
+
+.user-preview.found {
+    background: rgba(46, 204, 113, 0.1);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(46, 204, 113, 0.3);
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.user-username {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.loading-small {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(52, 152, 219, 0.3);
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  .main-panel {
+    padding: 20px;
+  }
+  
+  .button {
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+}

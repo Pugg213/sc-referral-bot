@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SC Premium Store</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: var(--tg-theme-bg-color, #f8f9fa);
+            color: var(--tg-theme-text-color, #000);
+            padding: 16px;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--tg-theme-text-color, #000);
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--tg-theme-hint-color, #666);
+            font-size: 14px;
+        }
+
+        .user-info {
+            background: var(--tg-theme-secondary-bg-color, #fff);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            border: 1px solid var(--tg-theme-section-separator-color, #e5e5e5);
+        }
+
+        .balance {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .balance-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--tg-theme-accent-text-color, #007AFF);
+        }
+
+        .balance-label {
+            font-size: 14px;
+            color: var(--tg-theme-hint-color, #666);
+            margin-top: 4px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .product-card {
+            background: var(--tg-theme-secondary-bg-color, #fff);
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid var(--tg-theme-section-separator-color, #e5e5e5);
+            transition: all 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--tg-theme-accent-text-color, #007AFF);
+            font-weight: 600;
+        }
+
+        .star-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .product-description {
+            color: var(--tg-theme-hint-color, #666);
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .product-benefits {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        .product-benefits li {
+            font-size: 13px;
+            color: var(--tg-theme-text-color, #000);
+            margin-bottom: 4px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .product-benefits li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+        }
+
+        .buy-button {
+            width: 100%;
+            background: var(--tg-theme-button-color, #007AFF);
+            color: var(--tg-theme-button-text-color, #fff);
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .buy-button:hover {
+            opacity: 0.8;
+        }
+
+        .buy-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .popular-badge {
+            background: #FF6B35;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--tg-theme-hint-color, #666);
+        }
+
+        .error {
+            background: #FF3B30;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        @media (min-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SC Premium Store</h1>
+        <p>Премиум функции за Telegram Stars</p>
+    </div>
+
+    <div class="user-info">
+        <div class="balance">
+            <div class="balance-amount" id="user-balance">0.00</div>
+            <div class="balance-label">SC Tokens</div>
+        </div>
+    </div>
+
+    <div id="error-container"></div>
+    <div id="loading" class="loading">Загрузка продуктов...</div>
+    <div id="products-container" class="products-grid" style="display: none;"></div>
+
+    <script>
+        // Telegram WebApp initialization
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+
+        // Set theme
+        document.documentElement.style.setProperty('--tg-theme-bg-color', tg.themeParams.bg_color || '#f8f9fa');
+        document.documentElement.style.setProperty('--tg-theme-text-color', tg.themeParams.text_color || '#000');
+        document.documentElement.style.setProperty('--tg-theme-hint-color', tg.themeParams.hint_color || '#666');
+        document.documentElement.style.setProperty('--tg-theme-button-color', tg.themeParams.button_color || '#007AFF');
+        document.documentElement.style.setProperty('--tg-theme-button-text-color', tg.themeParams.button_text_color || '#fff');
+
+        // Get user data
+        const user = tg.initDataUnsafe?.user;
+        const userId = user?.id;
+
+        // API endpoints
+        const API_BASE = '/api/tma';
+
+        // Show error message
+        function showError(message) {
+            const errorContainer = document.getElementById('error-container');
+            errorContainer.innerHTML = `<div class="error">${message}</div>`;
+        }
+
+        // Load user balance
+        async function loadUserBalance() {
+            try {
+                const response = await fetch(`${API_BASE}/user/${userId}/balance`);
+                if (!response.ok) throw new Error('Failed to load balance');
+                
+                const data = await response.json();
+                document.getElementById('user-balance').textContent = data.balance.toFixed(2);
+            } catch (error) {
+                console.error('Error loading balance:', error);
+            }
+        }
+
+        // Load products with premium options
+        async function loadProducts() {
+            try {
+                const response = await fetch(`${API_BASE}/products`);
+                if (!response.ok) throw new Error('Failed to load products');
+                
+                const data = await response.json();
+                const { stars_products, premium_products, channel_products } = data;
+                
+                renderProductCategories(stars_products, premium_products, channel_products);
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('products-container').style.display = 'grid';
+            } catch (error) {
+                console.error('Error loading products:', error);
+                showError('Ошибка загрузки продуктов');
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Render products
+        function renderProducts(products) {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
+
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                const benefitsList = product.benefits.map(benefit => 
+                    `<li>${benefit}</li>`
+                ).join('');
+
+                productCard.innerHTML = `
+                    <div class="product-header">
+                        <div class="product-title">${product.title}</div>
+                        ${product.popular ? '<div class="popular-badge">Популярно</div>' : ''}
+                    </div>
+                    <div class="product-price">
+                        <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        ${product.price} Stars
+                    </div>
+                    <div class="product-description">${product.description}</div>
+                    <ul class="product-benefits">${benefitsList}</ul>
+                    <button class="buy-button" onclick="buyProduct('${product.id}', ${product.price}, '${product.title}')">
+                        Купить за ${product.price} ⭐
+                    </button>
+                `;
+                
+                container.appendChild(productCard);
+            });
+        }
+
+        // Buy product via Rhombis API
+        async function buyProduct(productId, price, title) {
+            try {
+                const button = event.target;
+                button.disabled = true;
+                button.textContent = 'Создание транзакции...';
+
+                const response = await fetch(`${API_BASE}/create-invoice`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        product_id: productId,
+                        amount: price,
+                        title: title
+                    })
+                });
+
+                if (!response.ok) throw new Error('Failed to create transaction');
+                
+                const data = await response.json();
+                
+                // Show TON transaction instructions
+                const instructions = data.instructions;
+                const starsQuantity = data.stars_quantity;
+                
+                const instructionText = `
+💫 <b>Инструкции для покупки ${starsQuantity} Stars</b>
+
+1️⃣ <b>Адрес:</b> <code>${instructions.address}</code>
+
+2️⃣ <b>Сумма:</b> ${(instructions.amount / 1000000000).toFixed(4)} TON
+
+3️⃣ <b>Payload:</b> <code>${instructions.payload}</code>
+
+⚠️ <b>ВАЖНО:</b> Не отправляйте payload как комментарий!
+Используйте специальное поле для payload в вашем TON кошельке.
+
+После отправки транзакции Stars будут автоматически зачислены на ваш аккаунт в Telegram.
+                `;
+                
+                // Show instructions in Telegram
+                tg.showAlert('Инструкции отправлены! Проверьте чат с ботом для деталей транзакции.');
+                
+                // Send instructions to user via bot
+                await fetch('/api/tma/send-instructions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        instructions: instructionText,
+                        product: data.product
+                    })
+                });
+                
+                button.disabled = false;
+                button.textContent = `Купить за ${price} ⭐`;
+                
+            } catch (error) {
+                console.error('Error buying product:', error);
+                showError('Ошибка при создании транзакции');
+                
+                const button = event.target;
+                button.disabled = false;
+                button.textContent = `Купить за ${price} ⭐`;
+            }
+        }
+
+        // Initialize app
+        if (userId) {
+            loadUserBalance();
+            loadProducts();
+        } else {
+            showError('Ошибка: не удалось получить данные пользователя');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="24" fill="#1673fa"/>
+  <rect x="16" y="16" width="96" height="96" rx="16" fill="#ffffff" fill-opacity="0.1"/>
+  <path d="M40 48L64 32L88 48L88 80L64 96L40 80Z" fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="64" cy="64" r="16" fill="#ffffff"/>
+  <text x="64" y="112" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">Rhombis</text>
+</svg>

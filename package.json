@@ -1,0 +1,31 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "Telegram-бот с реферальной системой капсул, анти-накруткой и офчейн-балансами SC токенов.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite --host 0.0.0.0 --port 5001",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 3000",
+    "start": "vite preview --host 0.0.0.0 --port 80"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@stripe/react-stripe-js": "^3.9.1",
+    "@stripe/stripe-js": "^7.8.0",
+    "@ton/core": "^0.61.0",
+    "@tonconnect/ui": "^2.2.0",
+    "@types/memoizee": "^0.4.12",
+    "@vitejs/plugin-react": "^5.0.1",
+    "buffer": "^6.0.3",
+    "memoizee": "^0.4.17",
+    "openid-client": "^6.6.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "stripe": "^18.4.0",
+    "vite": "^7.1.3"
+  }
+}

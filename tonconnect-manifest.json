@@ -1,0 +1,7 @@
+{
+    "url": "https://{{DYNAMIC_DOMAIN}}",
+    "name": "Rhombis TMA",
+    "iconUrl": "https://{{DYNAMIC_DOMAIN}}/icon.svg",
+    "termsOfUseUrl": "https://rhombis.app/terms",
+    "privacyPolicyUrl": "https://rhombis.app/privacy"
+}

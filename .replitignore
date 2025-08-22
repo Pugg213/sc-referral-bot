@@ -1,0 +1,61 @@
+# Development files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.DS_Store
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Node modules (if any)
+node_modules/
+
+# Backup files
+*.backup
+*.bak
+*~
+
+# Environment files (secrets should be in Replit Secrets)
+.env
+.env.local
+.env.production
+
+# Database backups (keep main db)
+backup_stats_*.db
+
+# Cache directories
+.cache/
+.npm/
+.yarn/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Test files
+test_*.py
+*_test.py
+tests/

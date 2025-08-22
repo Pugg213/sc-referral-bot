@@ -1,0 +1,15 @@
+# 🚀 КОМАНДЫ ДЛЯ ЗАГРУЗКИ НА GITHUB
+
+# Эти команды нужно выполнить в терминале Replit:
+
+git init .
+git remote add origin https://github.com/Pugg213/sc-referral-bot.git
+git add .
+git config user.email "your-email@example.com"
+git config user.name "Pugg213"
+git commit -m "🚀 Initial commit: Complete SC Referral Bot with 40+ modules"
+git branch -M main
+git push -u origin main
+
+# ИЛИ просто скопируй и вставь эту одну команду:
+git init . && git remote add origin https://github.com/Pugg213/sc-referral-bot.git && git add . && git config user.email "your-email@example.com" && git config user.name "Pugg213" && git commit -m "Initial commit: SC Referral Bot" && git branch -M main && git push -u origin main
